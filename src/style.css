@@ -1,0 +1,393 @@
+/* Import Font (contoh: Poppins dari Google Fonts) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary-color: #ffffff;
+    --secondary-color: #a9a9a9;
+    --background-color: #0a0a0a;
+    --accent-color: #007bff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    margin: 0;
+    overflow-x: hidden; /* Mencegah scroll horizontal */
+}
+
+/* ================== STYLE HEADER & NAVIGASI ================== */
+
+header {
+    position: fixed; /* Membuat header tetap di atas saat di-scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 8%; /* Padding atas/bawah 20px, samping 8% */
+    background-color: rgba(10, 10, 10, 0.5); /* Latar belakang semi-transparan */
+    backdrop-filter: blur(10px); /* Efek glass/blur pada background */
+    display: flex;
+    justify-content: space-between; /* Mendorong logo dan menu ke sisi berlawanan */
+    align-items: center;
+    z-index: 100; /* Memastikan header selalu di lapisan paling atas */
+    transition: background-color 0.3s ease;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; /* Menghilangkan bullet points */
+    display: flex;
+    gap: 40px; /* Jarak antar menu */
+}
+
+nav a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+    position: relative; /* Diperlukan untuk garis bawah animasi */
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Efek garis bawah saat hover */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-size: 5rem;
+    font-weight: 700;
+    margin: 0;
+    /* Persiapan untuk animasi: sembunyikan awalnya */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--secondary-color);
+    margin-top: 10px;
+    /* Persiapan untuk animasi */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.cta-button {
+    margin-top: 30px;
+    padding: 15px 30px;
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    /* Persiapan untuk animasi */
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+    background-color: #0056b3;
+}
+
+/* ================== STYLE BAGIAN PROYEK ================== */
+
+.projects-section {
+    padding: 100px 5%; /* Padding atas-bawah 100px, samping 5% */
+    background-color: #111; /* Sedikit lebih terang dari background utama */
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    font-weight: 600;
+}
+
+.projects-grid {
+    display: grid;
+    /* Membuat kolom grid yang responsif. 
+       Setiap kolom minimal 300px, dan akan mengisi ruang yang tersedia. */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem; /* Jarak antar kartu proyek */
+}
+
+.project-card {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    overflow: hidden; /* Penting untuk efek zoom gambar */
+    position: relative; /* Penting untuk overlay */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px); /* Kartu sedikit terangkat saat di-hover */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.project-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /* Memastikan gambar mengisi area tanpa distorsi */
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.1); /* Gambar membesar saat kartu di-hover */
+}
+
+/* --- Lapisan Overlay untuk Efek Hover --- */
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+    color: white;
+    
+    /* Menyelaraskan konten di dalam overlay */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Konten mulai dari bawah */
+    padding: 20px;
+    box-sizing: border-box; /* Agar padding tidak merusak layout */
+
+    opacity: 0; /* Awalnya tidak terlihat */
+    transition: opacity 0.5s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1; /* Muncul saat kartu di-hover */
+}
+
+.project-overlay h3 {
+    margin: 0;
+    transform: translateY(15px); /* Posisi awal untuk animasi */
+    transition: transform 0.4s ease;
+}
+
+.project-overlay p {
+    margin: 5px 0 15px 0;
+    transform: translateY(15px);
+    transition: transform 0.4s ease 0.1s; /* Diberi delay sedikit */
+}
+
+.project-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    transform: translateY(15px);
+    transition: transform 0.4s ease 0.2s; /* Diberi delay lebih lama */
+}
+
+.project-card:hover .project-overlay h3,
+.project-card:hover .project-overlay p,
+.project-card:hover .project-overlay .project-link {
+    transform: translateY(0); /* Konten teks bergerak ke atas saat hover */
+}
+
+/* ================== STYLE BAGIAN TENTANG SAYA ================== */
+
+.about-section {
+    padding: 100px 8%; /* Padding lebih lebar untuk konten teks */
+    background-color: var(--background-color);
+}
+
+.about-content {
+    display: flex;
+    align-items: center; /* Menyelaraskan item secara vertikal di tengah */
+    gap: 4rem; /* Jarak antara kolom gambar dan teks */
+    flex-wrap: wrap; /* Izinkan kolom untuk turun ke bawah pada layar kecil */
+}
+
+.about-image {
+    flex: 1; /* Kolom gambar mengambil 1 bagian ruang */
+    min-width: 280px; /* Lebar minimum sebelum kolom turun */
+    text-align: center;
+}
+
+.about-image img {
+    max-width: 350px;
+    width: 100%;
+    border-radius: 50%; /* Membuat gambar menjadi lingkaran */
+    border: 5px solid #333;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.about-text {
+    flex: 2; /* Kolom teks mengambil 2 bagian ruang (lebih lebar) */
+    min-width: 300px;
+}
+
+.about-text h3 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.about-text p {
+    line-height: 1.7;
+    color: var(--secondary-color);
+}
+
+.about-text h4 {
+    font-size: 1.2rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background-color: #222;
+    color: var(--primary-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid #333;
+}
+
+.cv-button {
+    margin-top: 30px;
+    display: inline-block; /* Agar margin-top berfungsi */
+}
+
+/* ================== STYLE BAGIAN KONTAK ================== */
+.contact-section {
+    padding: 100px 8%;
+    background-color: #111;
+    text-align: center;
+}
+
+.section-subtitle {
+    max-width: 600px;
+    margin: 0 auto 50px auto;
+    color: var(--secondary-color);
+    line-height: 1.6;
+}
+
+.form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 5px;
+    color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.contact-section .cta-button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+
+/* ================== STYLE FOOTER ================== */
+.footer {
+    padding: 40px 20px;
+    background-color: #0a0a0a;
+    text-align: center;
+}
+
+.social-links {
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    color: var(--secondary-color);
+    font-size: 1.5rem; /* Ukuran ikon */
+    margin: 0 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+    transform: scale(1.2);
+}
+
+.copyright {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.about-buttons {
+    display: flex;
+    flex-wrap: wrap; /* Tombol akan turun ke bawah jika layar sempit */
+    gap: 15px; /* Jarak antara tombol */
+    margin-top: 30px;
+}
+
+/* Kita tidak lagi perlu margin di tombolnya langsung */
+.cv-button {
+    margin-top: 0;
+}

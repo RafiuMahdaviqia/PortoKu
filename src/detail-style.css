@@ -1,0 +1,71 @@
+/* CSS Khusus Halaman Detail */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.detail-section {
+    padding: 120px 8% 60px; /* Padding atas lebih banyak untuk memberi ruang dari header */
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.detail-header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: var(--accent-color);
+}
+
+.demo-image {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.detail-content p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--secondary-color);
+    margin-bottom: 30px;
+}
+
+/* Memastikan warna teks pada tombol di halaman detail benar */
+.detail-content .cta-button {
+    color: var(--primary-color) !important;
+}
+
+/* Styling untuk ikon GitHub di halaman detail */
+.github-icon {
+    color: var(--primary-color)!important; /* Menggunakan warna teks utama (putih) */
+    margin-right: 8px; /* Memberi sedikit jarak antara ikon dan teks */
+    font-size: 1.2em;
+}
