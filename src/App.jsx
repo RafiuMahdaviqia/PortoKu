@@ -1,14 +1,23 @@
 // src/App.jsx
 
-// 1. PASTIKAN SEMUA KOMPONEN DI-IMPORT DI SINI
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+  useOutletContext,
+} from "react-router-dom";
+
+// Import komponen dan halaman
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import ProjectDetailPage from "./pages/ProjectDetailPage";
 
-function App() {
+// Layout utama yang berisi Navbar, Footer, dan tempat untuk konten (Outlet)
+const Layout = () => {
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -17,19 +26,50 @@ function App() {
   };
 
   return (
-    // 2. PASTIKAN SEMUA KOMPONEN DIPANGGIL DI DALAM RETURN
     <>
-    {/* Teruskan fungsi scrollToSection ke Navbar */}
       <Navbar onNavigate={scrollToSection} />
       <main>
-        <Hero />
-        <div id="projects"><Projects /></div>
-        <div id="about"><About /></div>
-        <div id="contact"><Contact /></div>
+        <Outlet context={{ onNavigate: scrollToSection }} />
       </main>
       <Footer />
     </>
   );
+};
+
+// Komponen khusus untuk halaman utama
+const HomePage = () => {
+  const { onNavigate } = useOutletContext();
+  return (
+    <>
+      <Hero onNavigate={onNavigate} />
+      <Projects />
+      <About />
+      <Contact />
+    </>
+  );
+};
+
+// Konfigurasi semua rute aplikasi
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      {
+        path: "/project/:projectId",
+        element: <ProjectDetailPage />,
+      },
+    ],
+  },
+]);
+
+// Komponen App utama yang merender router
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;

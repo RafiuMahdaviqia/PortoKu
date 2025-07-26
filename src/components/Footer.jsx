@@ -28,7 +28,7 @@ function Footer() {
         </a>
       </div>
       <p className="copyright">
-        &copy; <span id="current-year">{currentYear}</span> Rafi'u Mahdaviqia. Dibuat dengan HTML, JavaScript dan CSS.
+        &copy; <span id="current-year">{currentYear}</span> Rafi'u Mahdaviqia. Dibuat dengan React.
       </p>
     </footer>
   );

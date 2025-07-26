@@ -2,17 +2,41 @@
 
 import React from 'react';
 
-// Terima props onNavigate
 function Navbar({ onNavigate }) {
+  // Buat style sederhana agar button terlihat seperti link
+  const linkStyle = {
+    background: 'none',
+    border: 'none',
+    color: 'var(--secondary-color)',
+    cursor: 'pointer',
+    fontSize: '1rem',
+    fontWeight: 400,
+    padding: 0,
+    position: 'relative',
+    textDecoration: 'none'
+  };
+
   return (
     <header>
       <nav>
         <div className="logo">PortoKu.</div>
         <ul>
-          {/* Ganti href dengan onClick */}
-          <li><a href="#about" onClick={(e) => { e.preventDefault(); onNavigate('about'); }}>Tentang Saya</a></li>
-          <li><a href="#projects" onClick={(e) => { e.preventDefault(); onNavigate('projects'); }}>Projects</a></li>
-          <li><a href="#contact" onClick={(e) => { e.preventDefault(); onNavigate('contact'); }}>Contact</a></li>
+          {/* Ganti <a> menjadi <button> */}
+          <li>
+            <button style={linkStyle} onClick={() => onNavigate('about')}>
+              Tentang Saya
+            </button>
+          </li>
+          <li>
+            <button style={linkStyle} onClick={() => onNavigate('projects')}>
+              Projects
+            </button>
+          </li>
+          <li>
+            <button style={linkStyle} onClick={() => onNavigate('contact')}>
+              Contact
+            </button>
+          </li>
         </ul>
       </nav>
     </header>
