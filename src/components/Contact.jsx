@@ -1,15 +1,24 @@
-import React from 'react';
+// src/components/Contact.jsx
 
-// Pastikan nama fungsi adalah "Contact"
+import React from 'react';
+import { motion } from 'framer-motion';
+
 function Contact() {
   return (
-    <section id="contact" className="contact-section">
-      <h2 className="section-title" data-aos="fade-up">Hubungi Saya</h2>
-      <p className="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+    <motion.section
+      id="contact"
+      className="contact-section"
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true }}
+    >
+      <h2 className="section-title">Hubungi Saya</h2>
+      <p className="section-subtitle">
         Punya pertanyaan atau ingin bekerja sama? Jangan ragu untuk mengirim pesan.
       </p>
 
-      <div className="form-container" data-aos="fade-up" data-aos-delay="200">
+      <div className="form-container">
         <form action="https://formspree.io/f/xpwrgqjk" method="POST">
           <div className="form-group">
             <label htmlFor="name">Nama</label>
@@ -26,9 +35,8 @@ function Contact() {
           <button type="submit" className="cta-button">Kirim Pesan</button>
         </form>
       </div>
-    </section>
+    </motion.section>
   );
 }
 
-// PASTIKAN BARIS INI ADA DI PALING BAWAH DAN TULISANNYA BENAR
 export default Contact;
